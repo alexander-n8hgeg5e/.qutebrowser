@@ -3,7 +3,7 @@ config.load_autoconfig()
 
 
 from qutebrowser.utils import objreg
-from qutebrowser.commands import cmdutils
+from qutebrowser.api import cmdutils
 from qutebrowser.completion.models import urlmodel
 
 def is_most_right_tab():
@@ -85,20 +85,57 @@ def _openurl(url):
     """
     get_cmd_dispatcher().openurl(url)
 
+# tabs:
 config.bind('<Ctrl-Left>', 'tab-prev')
-config.bind('<Ctrl-s>', 'tab-prev')
 config.bind('<Ctrl-Right>', 'condtabnext')
+config.bind('<Ctrl-s>', 'tab-prev')
 config.bind('<Ctrl-f>', 'condtabnext')
-config.bind( '<Right>', 'scroll right')
-config.bind( '<Left>',  'scroll left' )
-config.bind( '<Down>',  'scroll down' )
+
+# caret mode:
+#       movement:
+config.bind( '<Up>',    'move-to-prev-line' , 'caret'   )
+config.bind( '<Down>',  'move-to-next-line' , 'caret' )
+config.bind( '<Left>',  'move-to-prev-char', 'caret' )
+config.bind( '<Right>', 'move-to-next-char', 'caret' )
+config.bind( 'e',  'run-with-count 4 move-to-prev-line',  'caret')
+config.bind( 'd',  'run-with-count 4 move-to-next-line',  'caret' )
+config.bind( 's',  'move-to-prev-word',   'caret' )
+config.bind( 'f',  'move-to-next-word',   'caret' )
+#       scrolling: 
+#                  slow:
+# <slow scroll placeholder>
+#          "
+#          "
+#          "
+#                  fast:
+config.bind( 'i',  'scroll-px 0 -80',     'caret')
+config.bind( 'k',  'scroll-px 0  80',     'caret')
+config.bind( 'j',  'scroll-px -30 0',     'caret')
+config.bind( 'l',  'scroll-px  30 0',     'caret')
+
+#normal mode:
+#        movement(movement not avail. so scroll)
 config.bind( '<Up>',    'scroll up'   )
-config.bind( '<,>',  'back'           )
-config.bind( '<.>',  'forward'        )
-config.bind( '<e>',  'scroll-px 0 -80')
-config.bind( '<d>',  'scroll-px 0  80')
-config.bind( '<s>',  'scroll-px -30 0')
-config.bind( '<f>',  'scroll-px  30 0')
+config.bind( '<Down>',  'scroll down' )
+config.bind( '<Left>',  'move-to-prev-char' )
+config.bind( '<Right>', 'move-to-next-char')
+config.bind( 'e',  'scroll-px   0 -80' )
+config.bind( 'd',  'scroll-px   0  80'  )
+config.bind( 's',  'scroll-px -30   0' )
+config.bind( 'f',  'scroll-px  30   0')
+#        scrolling:
+#                  slow:
+# <slow scroll placeholder>
+#          "
+#          "
+#          "
+#                  fast:
+config.bind( 'i',  'scroll-px 0 -80')
+config.bind( 'k',  'scroll-px 0  80')
+config.bind( 'j',  'scroll-px -30 0')
+config.bind( 'l',  'scroll-px  30 0')
+
+#other stuff:
 config.bind( '<Space>',  'hint')
 config.bind('<Ctrl-q>', 'tabquitclose')
 config.bind('<Ctrl-q>', 'tabquitclose','command')
@@ -113,6 +150,10 @@ config.bind('<Ctrl-PgDown>', 'completion-item-focus next-category', 'command')
 config.bind('p', 'insert-text {clipboard}')
 config.bind('p', 'insert-text {clipboard}')
 config.bind('<Del>', 'tab-close')
+config.bind('a', 'enter-mode insert')
+config.unbind('ad')
+config.bind( '<,>',  'back'           )
+config.bind( '<.>',  'forward'        )
 
 c.colors.tabs.bar.bg='#000000'
 c.colors.tabs.even.bg='#000000'
