@@ -101,6 +101,8 @@ config.bind( 'e',  'run-with-count 4 move-to-prev-line',  'caret')
 config.bind( 'd',  'run-with-count 4 move-to-next-line',  'caret' )
 config.bind( 's',  'move-to-prev-word',   'caret' )
 config.bind( 'f',  'move-to-next-word',   'caret' )
+config.bind( '<Home>',  'move-to-start-of-line','caret')
+config.bind( '<End>',  'move-to-end-of-line',     'caret')
 #       scrolling: 
 #                  slow:
 # <slow scroll placeholder>
@@ -112,6 +114,9 @@ config.bind( 'i',  'scroll-px 0 -80',     'caret')
 config.bind( 'k',  'scroll-px 0  80',     'caret')
 config.bind( 'j',  'scroll-px -30 0',     'caret')
 config.bind( 'l',  'scroll-px  30 0',     'caret')
+config.bind( '<PgUp>',  'scroll-px 0 +160',     'caret')
+config.bind( '<PgDown>',  'scroll-px 0 -160',     'caret')
+config.bind( 'k',  'scroll-px 0  80',     'caret')
 
 #normal mode:
 #        movement(movement not avail. so scroll)
@@ -123,6 +128,8 @@ config.bind( 'e',  'scroll-px   0 -80' )
 config.bind( 'd',  'scroll-px   0  80'  )
 config.bind( 's',  'scroll-px -30   0' )
 config.bind( 'f',  'scroll-px  30   0')
+config.bind( '<Home>',  'move-to-start-of-line')
+config.bind( '<End>',  'move-to-end-of-line')
 #        scrolling:
 #                  slow:
 # <slow scroll placeholder>
@@ -135,8 +142,11 @@ config.bind( 'k',  'scroll-px 0  80')
 config.bind( 'j',  'scroll-px -30 0')
 config.bind( 'l',  'scroll-px  30 0')
 
+#hinting
+config.bind( '<Space><Space>',  'hint',mode="normal")
+config.bind( '<Space>t',  'hint all tab-bg',mode="normal")
+
 #other stuff:
-config.bind( '<Space>',  'hint')
 config.bind('<Ctrl-q>', 'tabquitclose')
 config.bind('<Ctrl-q>', 'tabquitclose','command')
 config.bind('<Ctrl-Down>', 'set-cmd-text :')
